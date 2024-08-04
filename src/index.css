@@ -1,0 +1,193 @@
+/* Genel Stiller */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  overflow: hidden;
+  height: 100%;
+}
+
+.space-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+  z-index: -2;
+}
+
+.stars,
+.shooting-star,
+.planet {
+  z-index: -1; /* Arka plan gradyanının üstünde, ancak içeriğin altında */
+}
+
+/* Yıldızlar */
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle 5s infinite;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Kayan Yıldız */
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  animation: shoot 5s linear infinite;
+}
+
+@keyframes shoot {
+  0% {
+    transform: translateX(-100%) translateY(-100%);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%) translateY(200%);
+    opacity: 0;
+  }
+}
+
+/* Gezegenler */
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  animation: rotate 100s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* İçerik Konteyneri */
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  margin: 20px;
+}
+
+/* Form Elementleri */
+input,
+textarea,
+button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #4a90e2;
+}
+
+button {
+  background-color: #4a90e2;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
+}
+
+button:hover {
+  background-color: #357abd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar Stili */
+nav {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  position: relative;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #4a90e2;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav div {
+    margin-top: 10px;
+  }
+}
+
+li {
+  /* Diğer stiller aynı kalacak */
+  cursor: grab;
+}
+
+li:active {
+  cursor: grabbing;
+}
+
+.dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+}
