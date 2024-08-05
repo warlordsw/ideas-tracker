@@ -8,6 +8,41 @@ export function Home() {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [AI, setAI] = useState("");
+  const [result, setResult] = useState("");
+  const [AIButtonName, setAIButtonName] = useState("Ask to AI");
+
+  const HandleButton = async (e, data) => {
+    e.preventDefault();
+    try {
+      setAIButtonName("Getting AI Help... Please Wait");
+      // Make an AJAX request to the custom endpoint
+      const response = await fetch(
+        `https://66b0149175c492528b35.appwrite.global/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            AIData: data,
+          }),
+        }
+      );
+      const result = await response.json();
+
+      if (result) {
+        setAIButtonName("Speak With AI");
+        console.log(result.data.choices[0].message.content);
+        setResult(result.data.choices[0].message.content);
+
+        // setResult(result);
+        return result;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -40,6 +75,23 @@ export function Home() {
               Submit
             </button>
           </form>
+          <div>
+            <input
+              type="text"
+              placeholder="Write Something"
+              value={AI}
+              onChange={(e) => setAI(e.target.value)}
+            />
+            <button
+              disabled={
+                AIButtonName === "Getting AI Help... Please Wait" ? true : false
+              }
+              onClick={(e) => HandleButton(e, AI)}
+            >
+              {AIButtonName}
+            </button>
+            <div>{result}</div>
+          </div>
         </section>
       ) : (
         <section>
